@@ -71,7 +71,7 @@ public interface ListInterface<T>
 
     */
 
-   public T toArray();
+   public T[] toArray();
    /* retrives all entries in this list in order in which they appears in the list
 
    @return newly allocated array of all entries in list.
