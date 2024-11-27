@@ -7,7 +7,7 @@ public class AListClient
 {
    public static void main(String[] args){
 
-      AListArray myList = new AListArray();
+      AListChain2 myList = new AListChain2();
 
       myList.add(1);
       myList.add(2);
