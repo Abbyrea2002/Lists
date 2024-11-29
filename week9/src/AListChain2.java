@@ -6,14 +6,65 @@ public class AListChain2<T> implements ListInterface<T>
 {
    private MyNode2 firstNode, lastNode;
    private int numberOfEntries;
-   private MyNode2 getNodeAt(int position){
-      if(position >= 1 && position <= numberOfEntries){
-         MyNode2 currentNode = firstNode;
-         for(int i = 1; i < position; i++)
+   public MyNode2 getNodeAt(int position){
+      if (position < 1 || position > numberOfEntries) return null;
+
+      MyNode2 currentNode;
+      int jumps = 0;
+
+      // Decide whether to start from the head or tail
+      if (position <= numberOfEntries / 2) {
+         currentNode = firstNode;
+         for (int i = 1; i < position; i++) {
             currentNode = currentNode.getNextNode();
-         return currentNode;
-      }else return null;
+            jumps++;
+         }
+      } else {
+         currentNode = lastNode;
+         for (int i = numberOfEntries; i > position; i--) {
+            currentNode = currentNode.getPreviousNode();
+            jumps++;
+         }
+      }
+
+      return currentNode;
    }
+   public int getNodeJumps(int position) {
+      if (position < 1 || position > numberOfEntries) return -1;
+
+      int jumps = 0;
+      MyNode2 currentNode;
+
+      // Decide whether to start from the head or tail
+      if (position <= numberOfEntries / 2) {
+         currentNode = firstNode;
+         for (int i = 1; i < position; i++) {
+            currentNode = currentNode.getNextNode();
+            jumps++;
+         }
+      } else {
+         currentNode = lastNode;
+         for (int i = numberOfEntries; i > position; i--) {
+            currentNode = currentNode.getPreviousNode();
+            jumps++;
+         }
+      }
+      return jumps;
+   }
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder("[");
+      MyNode2 currentNode = firstNode;
+      while (currentNode != null) {
+         sb.append(currentNode.getData()).append(", ");
+         currentNode = currentNode.getNextNode();
+      }
+      if (sb.length() > 1) sb.setLength(sb.length() - 2); // Remove trailing comma
+      sb.append("]");
+      return sb.toString();
+   }
+
+
 
 
 
